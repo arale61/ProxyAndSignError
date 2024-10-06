@@ -124,7 +124,7 @@ As part of the proxy functionality I want to sign the requests using AWS Credent
 
 If the proxied HttpRequestMessage handles its HttpContent as a StringContent, other libraries can re-read the content for its purposes, such as calculating a hash content based. This enables other libraries that leverage custom http clients to do their work if its content based.
 
-Using StringContent provides enough stream features for third party libraries to use the content and good abstraction for handling text based content requests such as "application/json" and "application/xml", but of course, can be extended to more text based content types.
+Using StringContent provides enough stream features for third party libraries to use the content and good abstraction for handling text based content requests such as "application/json" or "application/xml", but of course, can be extended to more text based content types.
 
 Some details follow:
 
@@ -268,14 +268,20 @@ private static bool IsTextBasedMimeType(HttpRequest request)
     var textBased = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
         "application/json",
-        "application/xml"
+        "application/xml",
+        "text/html",
+        "text/plain",
+        "text/css",
+        "text/javascript",
+        "text/markdown",
+        "text/csv"
     };
     
     return textBased.Contains(GetContentType(request));
 }
 ```
 
-This enables to proxy and sign POST/PUT/PATCH requests with a body of type "application/json" or "application/xml" with combining both libraries.
+This enables to proxy and sign POST/PUT/PATCH requests with a body of type "application/json" or "application/xml" and other text based contents, with combining both libraries.
 
 ## Important notes on proposal
 I have limited time for this little proposal.
