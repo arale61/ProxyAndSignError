@@ -7,14 +7,18 @@ Demo for problems while trying to integrate **AspNetProxy.Core** and **AwsSignat
 
 ## Motivation
 Combining **AspNetProxy.Core** with **AwsSignatureVersion4** enables to sign proxied requests.
+
 The solution offers the capability to offer signed proxied requests in a very simple and elegant way, leveraging both libraries.
+
 The problem comes when trying to proxy text content based requests (e.g. POST/PUT/PATCH) and how AspNetProxy.Core creates the
 HttpContent of the request as StreamContent combined with how AwsSignatureVersion4 tries to read the content from the StreamContent HttpContent for doing its work.
 
 ### AspNetProxy.Core StreamContent
-AspNetCore.Proxy uses the AspNetCore.Proxy.HttpExtensions class for proxying http requests.
-In the CreateProxiedHttpRequest extension method is where it creates the corresponding HttpRequestMessage with the HttpContent of the original request.
-Check the code(https://github.com/twitchax/AspNetCore.Proxy/blob/ef2bf59719c167fa71fa3b234fdb6e397886bc4d/src/Core/Extensions/Http.cs#L82):
+*AspNetCore.Proxy* uses the **AspNetCore.Proxy.Http** extensions class for proxying http requests.
+
+In the **CreateProxiedHttpRequest** extension method is where it creates the corresponding HttpRequestMessage with the HttpContent of the original request.
+
+Check the [code](https://github.com/twitchax/AspNetCore.Proxy/blob/ef2bf59719c167fa71fa3b234fdb6e397886bc4d/src/Core/Extensions/Http.cs#L82):
 
 ```csharp
 // Write to request content, when necessary.
@@ -36,7 +40,8 @@ if (!HttpMethods.IsGet(requestMethod) &&
 ```
 
 ### AwsSignatureVersion4 Signed Requests
-When AspNetCore.Proxy delegates the SendAsync or similar methods to the configured and injected AwsSignatureVersion4HttpClient, it will try to read the content from the HttpContent of the request (for content based requests - POST/PUT/PATCH) to calculate the corresponding hash.
+When **AspNetCore.Proxy** calls the SendAsync or similar methods to the configured and injected **AwsSignatureVersion4HttpClient**, it will try to read the content from the *HttpContent* of the request (for content based requests - POST/PUT/PATCH) to calculate the corresponding hash.
+
 See the [Signer class](https://github.com/FantasticFiasco/aws-signature-version-4/blob/c34851814bc5128cc5544958b2db6a6000dbe457/src/Private/Signer.cs#L26)
 
 ```csharp
@@ -60,6 +65,7 @@ public static async Task<Result> SignAsync(
 ```
 
 Inside the class responsible for calculating the hash we find the next problem, that combined fire the exception.
+
 Check the [ContentHash class](https://github.com/FantasticFiasco/aws-signature-version-4/blob/master/src/Private/ContentHash.cs):
 
 ```csharp
@@ -191,11 +197,13 @@ And also you can notice the use of **ReadOnlyStream class** found in the same fi
 ### StringContent class info
 
 For [StringContent class](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.stringcontent?view=net-8.0) we can also check the [source code](https://github.com/dotnet/runtime/blob/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/System.Net.Http/src/System/Net/Http/StringContent.cs).
+
 There we can see that is kind of base http content class for text based http content.
 It doesn't pose the same stream limitations for consumption.
 
 ### JsonContent class info
 Not directly supported in AspNetCore.Proxy, I believe a new dependency needs to be added to have access to it.
+
 Is a specific HttpContent class that leverages on Json types as body using Json Serializers and Deserializers. This I can only see interesting if the proxy needs to deal with some sort of content transformation or validation, which is not my need and seems also not a need for AspNetCore.Proxy. Also this is not a trivial case to solve.
 
 Rather, using StringContent we merely transport the "content as a string".
@@ -281,7 +289,7 @@ Check the [RUN_SAMPLE.md](./RUN_SAMPLE.md) for instructions.
 
 ## Other tools used
 
-**Burp Community** for testing proxying requests.
-**Wireshark** for monitoring the aspnetcore proxied request messages containing the expected aws signature.
-**json file** for moking a list of todos.
-**python http server** for having a local endpoint to test and monitor.
+- **Burp Community** for testing proxying requests.
+- **Wireshark** for monitoring the aspnetcore proxied request messages containing the expected aws signature.
+- **json file** for moking a list of todos.
+- **python http server** for having a local endpoint to test and monitor.
