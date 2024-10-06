@@ -288,7 +288,7 @@ Check the [RUN_SAMPLE.md](./RUN_SAMPLE.md) for instructions.
 
 ## Other tools used
 
-**Burp Community** for testing proxying requests.
-**Wireshark** for monitoring the aspnetcore proxied request messages containing the expected aws signature.
-**json file** for moking a list of todos.
-**python http server** for having a local endpoint to test and monitor.
+- **Burp Community** for testing proxying requests.
+- **Wireshark** for monitoring the aspnetcore proxied request messages containing the expected aws signature.
+- **json file** for moking a list of todos.
+- **python http server** for having a local endpoint to test and monitor.
