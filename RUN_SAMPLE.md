@@ -244,10 +244,10 @@ User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115
 Accept-Encoding: gzip, deflate, br
 Accept-Language: en-US, en; q=0.5
 Upgrade-Insecure-Requests: 1
-X-Amz-Date: 20241006T163400Z
-Authorization: AWS4-HMAC-SHA256 Credential=AKIARANDOMACESSKEYID/20241006/eu-central-1/execute-api/aws4_request, SignedHeaders=accept;accept-encoding;accept-language;connection;host;upgrade-insecure-requests;user-agent;x-amz-date, Signature=a4994dfa5c7c7a43e5450161bd9591dc2f030c4d00e309ec89ae59e22be34ff5
-traceparent: 00-9a3d28759626af81bef3a83db745f70d-a978b69288b9b08a-00
-Content-Type: text/plain; charset=utf-8
+X-Amz-Date: 20241006T230609Z
+Authorization: AWS4-HMAC-SHA256 Credential=AKIARANDOMACESSKEYID/20241006/eu-central-1/execute-api/aws4_request, SignedHeaders=accept;accept-encoding;accept-language;connection;host;upgrade-insecure-requests;user-agent;x-amz-date, Signature=bc562c8bafa78e21fd46d04dbc7e9e68940d166577d300a196f3a9a2895cb369
+traceparent: 00-1a46cad67cd014ed6e62f97766286d04-60066e64cd5b66c2-00
+Content-Type: application/json; charset=utf-8
 Content-Length: 101
 
 {"createdAt":"2024-10-05T21:59:34.741Z","name":"name 1","description":"description 6767","id":"6767"}
