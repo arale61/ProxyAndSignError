@@ -113,6 +113,9 @@ Specified method is not supported.
 ```
 
 ## Proposal
+
+**UPDATE:** NEW ISSUE RELATED WITH HTTP HEADERS THAT ASPNETCORE.PROXY GENERATES/MANAGES AND WHEN THE SIGNER FROM AWSSIGNATUREVERSION4 TRIES TO CALCULATE THE SIGNATURE MAKED ME REFUSE FROM THIS INTEGRATION.
+
 While trying to sort out a solution, I wanted to understand the HttpContent class better and how it works internally.
 
 Also I wanted to see alternative versions for reading the content from AwsSignatureVersion4.
@@ -129,6 +132,8 @@ Using StringContent provides enough stream features for third party libraries to
 Some details follow:
 
 ### HttpRequestMessage and HttpContent
+
+**UPDATE:** NEW ISSUE RELATED WITH HTTP HEADERS THAT ASPNETCORE.PROXY GENERATES/MANAGES AND WHEN THE SIGNER FROM AWSSIGNATUREVERSION4 TRIES TO CALCULATE THE SIGNATURE MAKED ME REFUSE FROM THIS INTEGRATION.
 
 Doing the first I went to HttpRequestMessage class documentation:
 https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httprequestmessage.content?view=net-8.0#system-net-http-httprequestmessage-content
@@ -152,6 +157,8 @@ A number of classes can be used for HTTP content. These include the following.
 ```
 
 ### StreamContent class info
+
+**UPDATE:** NEW ISSUE RELATED WITH HTTP HEADERS THAT ASPNETCORE.PROXY GENERATES/MANAGES AND WHEN THE SIGNER FROM AWSSIGNATUREVERSION4 TRIES TO CALCULATE THE SIGNATURE MAKED ME REFUSE FROM THIS INTEGRATION.
 
 For [StreamContent class](https://github.com/dotnet/runtime/blob/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/System.Net.Http/src/System/Net/Http/StreamContent.cs#L73) we can see:
 
