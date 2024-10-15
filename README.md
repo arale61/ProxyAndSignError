@@ -196,12 +196,17 @@ And also you can notice the use of **ReadOnlyStream class** found in the same fi
 
 ### StringContent class info
 
+**UPDATE:** NEW ISSUE RELATED WITH HTTP HEADERS THAT ASPNETCORE.PROXY GENERATES/MANAGES AND WHEN THE SIGNER FROM AWSSIGNATUREVERSION4 TRIES TO CALCULATE THE SIGNATURE MAKED ME REFUSE FROM THIS INTEGRATION.
+
 For [StringContent class](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.stringcontent?view=net-8.0) we can also check the [source code](https://github.com/dotnet/runtime/blob/5535e31a712343a63f5d7d796cd874e563e5ac14/src/libraries/System.Net.Http/src/System/Net/Http/StringContent.cs).
 
 There we can see that is kind of base http content class for text based http content.
 It doesn't pose the same stream limitations for consumption.
 
 ### JsonContent class info
+
+**UPDATE:** NEW ISSUE RELATED WITH HTTP HEADERS THAT ASPNETCORE.PROXY GENERATES/MANAGES AND WHEN THE SIGNER FROM AWSSIGNATUREVERSION4 TRIES TO CALCULATE THE SIGNATURE MAKED ME REFUSE FROM THIS INTEGRATION.
+
 Not directly supported in AspNetCore.Proxy, I believe a new dependency needs to be added to have access to it.
 
 Is a specific HttpContent class that leverages on Json types as body using Json Serializers and Deserializers. This I can only see interesting if the proxy needs to deal with some sort of content transformation or validation, which is not my need and seems also not a need for AspNetCore.Proxy. Also this is not a trivial case to solve.
@@ -209,6 +214,9 @@ Is a specific HttpContent class that leverages on Json types as body using Json 
 Rather, using StringContent we merely transport the "content as a string".
 
 ## Implementation details for proposal
+
+**UPDATE:** NEW ISSUE RELATED WITH HTTP HEADERS THAT ASPNETCORE.PROXY GENERATES/MANAGES AND WHEN THE SIGNER FROM AWSSIGNATUREVERSION4 TRIES TO CALCULATE THE SIGNATURE MAKED ME REFUSE FROM THIS INTEGRATION.
+
 Changes can be seen in my fork at https://github.com/arale61/AspNetCore.Proxy/
 
 The implementation details affect the [Core/Extensions/Http.cs](https://github.com/arale61/AspNetCore.Proxy/blob/master/src/Core/Extensions/Http.cs) file.
@@ -284,9 +292,16 @@ private static bool IsTextBasedMimeType(HttpRequest request)
 This enables to proxy and sign POST/PUT/PATCH requests with a body of type "application/json" or "application/xml" and other text based contents, with combining both libraries.
 
 ## Important notes on proposal
+
+**UPDATE:** NEW ISSUE RELATED WITH HTTP HEADERS THAT ASPNETCORE.PROXY GENERATES/MANAGES AND WHEN THE SIGNER FROM AWSSIGNATUREVERSION4 TRIES TO CALCULATE THE SIGNATURE MAKED ME REFUSE FROM THIS INTEGRATION.
+
 I have limited time for this little proposal.
 
 I am interested on the feedback from the community, so please feel free to comment and suggest improvements or correct errors and issues in this document.
+
+As highlighted in the **UPDATE** I refused to continue with this integration.
+
+**UPDATE:** NEW ISSUE RELATED WITH HTTP HEADERS THAT ASPNETCORE.PROXY GENERATES/MANAGES AND WHEN THE SIGNER FROM AWSSIGNATUREVERSION4 TRIES TO CALCULATE THE SIGNATURE MAKED ME REFUSE FROM THIS INTEGRATION.
 
 
 ## Using the sample
